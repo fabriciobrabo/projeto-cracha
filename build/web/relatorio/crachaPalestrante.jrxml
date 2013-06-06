@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="crachaPalestrante" language="groovy" pageWidth="595" pageHeight="842" columnWidth="219" leftMargin="3" rightMargin="373" topMargin="129" bottomMargin="118" uuid="f934664a-87d5-47f1-a147-364ca87036e5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="palestrante" class="java.lang.String"/>
+	<field name="instituicao" class="java.lang.String"/>
+	<field name="curso" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e604cc43-0faf-447e-8303-4707d88d9d3f" x="5" y="4" width="210" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{palestrante}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="33bf218e-135b-4ee6-bbad-af5408b21a22" x="5" y="92" width="210" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{instituicao}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="314a98fa-5d6c-4fd8-a82c-d4612c7869c0" x="5" y="47" width="210" height="41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8832f318-4631-4389-b041-8f8d319f6682" x="5" y="26" width="210" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Lucida Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo}.toUpperCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,62 @@
+/**
+ * Autor: Stelio Correa
+ * E-mail: stelio.correa@gmail.com | stelio.correa@ufra.edu.br
+ * Telefone: (91) 8811-3165
+*/
+*{
+    list-style: none;
+    text-decoration: none;
+}
+
+body{
+    font-family: Lucidatypewriter, monospace;
+}
+
+div{
+    border: 0px dotted black;
+}
+
+#page{
+    width: 90%;
+    min-width: 800px;
+    margin: 0 auto;
+}
+
+#header{
+    height: 140px;
+    margin-bottom: 5px;
+}
+
+/*#sidebar{
+    float: left;
+    width: 20%;
+    min-width: 200px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}*/
+
+#content{
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    /*border: 3px dotted #CC0;*/
+}
+
+#creditos{
+    position: absolute;
+    top: 50%;
+    margin-top:-160px;
+    right: 1px;
+}
+
+.mouseOver{
+    background: #faf3f3;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.mouseOver:hover {
+    background: #CCC;
+    border-radius: 10px;
+    padding: 20px;
+}

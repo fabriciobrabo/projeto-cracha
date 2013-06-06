@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../template/padrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="cadastro">
+            <h:inputHidden value="#{cursoBean.curso.id}"/>
+            
+            <p:panel>
+                <p:messages id="alertas"/>
+
+                <f:facet name="header">
+                    <h:outputText value="Inscri&ccedil;&atilde;o de Cursos"/>
+                </f:facet>
+
+                <f:facet name="footer">
+                    <p:commandButton id="btnSalvar" 
+                                     ajax="false" 
+                                     value="Salvar" 
+                                     action="#{cursoBean.salvar()}"
+                                     icon="ui-icon-disk"/>
+                </f:facet>
+
+                <h:panelGrid columns="2" cellspacing="5">
+
+                    <h:outputText value="Nome: "/>
+                    <p:inputText id="nome" 
+                                 value="#{cursoBean.curso.nome}" 
+                                 style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="Nome: Campo obrigat&oacute;rio"/>
+
+                    <h:outputText value="C&oacute;digo: "/>
+                    <p:inputText id="codigo" 
+                                 value="#{cursoBean.curso.codigo}" 
+                                 style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="C&oacute;digo: Campo obrigat&oacute;rio"/>
+                    
+                    <h:outputText value="Ministrante: "/>
+                    <p:selectOneMenu id="palestrante"
+                                     value="#{cursoBean.curso.palestrante}"
+                                     style="width: 455px;"
+                                     converter="palestranteConverter"
+                                     required="true"
+                                     requiredMessage="palestrante/Ministrante: Campo obrigat&oacute;rio">
+                        <f:selectItems value="#{cursoBean.palestrantes}"
+                                       var="palestrante"
+                                       itemLabel="#{palestrante.cracha}" 
+                                       itemValue="#{palestrante}"/>
+                    </p:selectOneMenu>
+                    
+                    <h:outputText value="Tipo: "/>
+                    <p:selectOneMenu id="tipo"
+                                     value="#{cursoBean.curso.tipo}"
+                                     style="width: 455px;"
+                                     required="true"
+                                     requiredMessage="Tipo: Campo obrigat&oacute;rio">
+                        <f:selectItem itemLabel="Curso" itemValue="Curso"/>
+                        <f:selectItem itemLabel="Minicurso" itemValue="Minicurso"/>
+                        <f:selectItem itemLabel="Palestra" itemValue="Palestra"/>
+                        <f:selectItem itemLabel="Workshop" itemValue="Workshop"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Carga Hor&aacute;ria: "/>
+                    <p:inputText id="ch" 
+                                 value="#{cursoBean.curso.cargaHoraria}" 
+                                 style="width: 100px;"
+                                 required="true"
+                                 requiredMessage="Carga Hor&aacute;ria: Campo obrigat&oacute;rio"/>
+                    
+                    <h:outputText value="Hor&aacute;rio: "/>
+                    <p:inputText id="horario" 
+                                 value="#{cursoBean.curso.horario}" 
+                                 style="width: 100px;"
+                                 required="true"
+                                 requiredMessage="Hor&aacute;rio: Campo obrigat&oacute;rio"/>
+                    
+                    <h:outputText value="Evento: "/>
+                    <p:selectOneMenu id="evento" 
+                                     value="#{cursoBean.curso.evento}" 
+                                     style="width: 455px;"
+                                     converter="eventoConverter"
+                                     required="true"
+                                     requiredMessage="Evento: Campo obrigat&oacute;rio">
+                        
+                        <f:selectItems value="#{cursoBean.eventos}"
+                                       var="evento"
+                                       itemLabel="#{evento.sigla}"
+                                       itemValue="#{evento}"/>
+                    </p:selectOneMenu>
+                    
+                    <h:outputText value="Observa&ccedil;&atilde;o: "/>
+                    <p:inputTextarea id="obs" 
+                                     value="#{cursoBean.curso.observacao}" 
+                                     style="width: 445px;"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../../template/padrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="cadastro">
+            <h:inputHidden value="#{coordenacaoBean.coordenador.id}"/>
+
+            <p:panel>
+                <p:messages id="alertas"/>
+
+                <f:facet name="header">
+                    <h:outputText value="Inscri&ccedil;&atilde;o de Coordenadores"/>
+                </f:facet>
+
+                <f:facet name="footer">
+                    <p:commandButton id="btnSalvar" 
+                                     ajax="false" 
+                                     value="Salvar" 
+                                     action="#{coordenacaoBean.salvar()}"
+                                     icon="ui-icon-disk"/>
+                </f:facet>
+
+                <h:panelGrid columns="3" cellspacing="5">
+
+                    <h:outputText value="Nome: "/>
+                    <p:inputText id="nome" 
+                                 value="#{coordenacaoBean.coordenador.nome}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="nome"/>
+
+                    <h:outputText value="Crach&aacute;: "/>
+                    <p:inputText id="cracha" 
+                                 value="#{coordenacaoBean.coordenador.cracha}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="cracha"/>
+
+                    <h:outputText value="Telefone: "/>
+                    <p:inputText id="telefone" 
+                                 value="#{coordenacaoBean.coordenador.telefone}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="telefone"/>
+
+                    <h:outputText value="E-mail: "/>
+                    <p:inputText id="email" 
+                                 value="#{coordenacaoBean.coordenador.email}" 
+                                 size="45">
+                        <f:validateRegex
+                            pattern="^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$"/>
+                    </p:inputText>
+                    <h:message for="email"/>
+
+                    <h:outputText value="Evento: "/>
+                    <p:selectOneMenu id="evento" 
+                                     value="#{coordenacaoBean.coordenador.evento}" 
+                                     style="width: 405px;"
+                                     converter="eventoConverter"
+                                     required="true"
+                                     requiredMessage="Campo obrigat&oacute;rio">
+
+                        <f:selectItems value="#{coordenacaoBean.eventos}"
+                                       var="evento"
+                                       itemLabel="#{evento.sigla}"
+                                       itemValue="#{evento}"/>
+                    </p:selectOneMenu>
+                    <h:message for="evento"/>
+
+                    <h:outputText value="Fun&ccedil;&atilde;o: "/>
+                    <p:inputText id="funcao" 
+                                 value="#{coordenacaoBean.coordenador.funcao}" 
+                                 size="45"/>
+                    <h:message for="funcao"/>
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

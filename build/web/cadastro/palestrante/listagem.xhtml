@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../../template/padrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:growl showDetail="true" showSummary="true"/>
+
+            <p:panel>
+                <f:facet name="header">
+                    <h:outputText value="Lista de Palestrantes"
+                                  style="font-size: 20px; font-weight: bold;"/>
+                </f:facet>
+
+                <p:dataTable 
+                    id="lista"
+                    var="palestrante" value="#{palestranteBean.palestrantes}"
+                    emptyMessage="Sem registro para a exibi&ccedil;&atilde;o."
+                    paginator="true" rows="10"  
+                    paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                    rowsPerPageTemplate="10,15,20,25">
+                    
+                    <f:facet name="header">
+                        <p:commandButton id="novo"
+                                     value="Novo registro"
+                                     ajax="false"
+                                     action="#{palestranteBean.novo()}"
+                                     icon="ui-icon-plusthick"/>
+                    </f:facet>
+
+                    <p:column headerText="Nome" filterBy="#{palestrante.nome}">  
+                        <h:outputText value="#{palestrante.nome}" />  
+                    </p:column>
+                    
+                    <p:column headerText="T&iacute;tulo" filterBy="#{palestrante.titulo}">  
+                        <h:outputText value="#{palestrante.titulo}" />  
+                    </p:column>
+                    
+                    <p:column headerText="Institui&ccedil;&atilde;o" 
+                              filterBy="#{palestrante.instituicao}">
+                        <h:outputText value="#{palestrante.instituicao}"/>
+                    </p:column>  
+
+                    <p:column headerText="A&ccedil;&otilde;es">
+                        <p:commandLink 
+                            action="#{palestranteBean.corrigir()}"
+                            title="Corrigir"
+                            ajax="false">  
+                            <h:graphicImage library="img" name="edit24.png"/>
+                            <f:setPropertyActionListener 
+                                value="#{palestrante}" 
+                                target="#{palestranteBean.palestrante}" />  
+                        </p:commandLink>  
+                    </p:column> 
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+        
+    </ui:define>
+</ui:composition>
