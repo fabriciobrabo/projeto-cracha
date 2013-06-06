@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Procer</title>
+        <link rel="icon" href="../resources/img/crachamono.ico" type="image/ico" />
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+    </h:head>
+    <h:body>
+        <div id="page">
+
+            <div id="header">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <h:graphicImage library="img" name="crachamono64x64.png"/>
+                    <h:outputText value="Sistema de Impress&atilde;o de Crach&aacute;"
+                                  style="font-size: 35px; font-weight: bold;"/>
+                </h:panelGrid>
+
+                <h:form prependId="false">
+                    <p:menubar>
+                        <p:menuitem value="Home" 
+                                    action="/index.xhtml?faces-redirect=true"
+                                    icon="ui-icon-home"/>
+                        
+                        <p:submenu label="Cadastros"
+                                   icon="ui-icon-pencil">
+                            <p:menuitem value="Evento" 
+                                        action="#{eventoBean.listar()}"/>
+                            
+                            <p:menuitem value="Curso" 
+                                        action="#{cursoBean.listar()}"/>
+                            
+                            <p:menuitem value="Coordenadores" 
+                                        action="#{coordenacaoBean.listar()}"/>
+                            
+                            <p:menuitem value="Ministrantes" 
+                                        action="#{palestranteBean.listar()}"/>
+                        </p:submenu>
+                        
+                        <p:submenu label="Participante"
+                                   icon="ui-icon-contact">
+                            <p:menuitem value="Nova Inscri&ccedil;&atilde;o" 
+                                        action="#{inscritoBean.novo()}"
+                                        icon="ui-icon-plusthick"/>
+                            <p:separator/>
+                            <p:menuitem value="Lista de Inscritos" 
+                                        action="#{inscritoBean.listar()}"/>
+                        </p:submenu>
+                        <p:submenu label="Relat&oacute;rios"
+                                   icon="ui-icon-print">
+                            <p:menuitem value="Geral Inscritos" 
+                                        action="#"/>
+                            <p:menuitem value="Credenciados" 
+                                        action="#"/>
+                            <p:menuitem value="Descredenciados" 
+                                        action="#"/>
+                        </p:submenu>
+                        <p:menuitem value="Sobre" 
+                                    action="#"
+                                    icon="ui-icon-notice"/>
+                    </p:menubar>
+                </h:form>
+            </div>
+
+            <div id="content">
+
+                <ui:insert name="content">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div align="center">
+                        <h:form prependId="false">
+                            <h:panelGrid columns="3" cellspacing="5" cellpadding="5">
+
+                                <h:commandLink action="#{inscritoBean.novo()}">
+                                    <h:graphicImage title="Nova Inscri&ccedil;&atilde;o" 
+                                                    library="img" 
+                                                    name="registro.png"
+                                                    styleClass="mouseOver"/>
+                                </h:commandLink>
+
+                                <h:commandLink action="#{inscritoBean.listar()}">
+                                    <h:graphicImage title="Lista de Inscritos" 
+                                                    library="img" 
+                                                    name="participantes.png"
+                                                    styleClass="mouseOver"/>
+                                </h:commandLink>
+
+                            </h:panelGrid>
+
+                        </h:form>
+                    </div>
+                </ui:insert>
+
+            </div>
+
+        </div>
+
+        <div id="creditos">
+            <h:graphicImage library="img" name="creditosBpmLab.png"/>
+        </div>
+    </h:body>
+</html>

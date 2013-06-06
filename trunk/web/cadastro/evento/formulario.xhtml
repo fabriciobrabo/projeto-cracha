@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../template/padrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="cadastro">
+            <h:inputHidden value="#{eventoBean.evento.id}"/>
+
+            <p:panel>
+
+                <f:facet name="header">
+                    <h:outputText value="Evento"/>
+                </f:facet>
+
+                <f:facet name="footer">
+                    <p:commandButton id="btnSalvar" 
+                                     ajax="false" 
+                                     value="Salvar" 
+                                     action="#{eventoBean.salvar()}"
+                                     icon="ui-icon-disk"/>
+                </f:facet>
+
+                <h:panelGrid columns="3" cellspacing="5">
+
+                    <h:outputText value="Nome: "/>
+                    <p:inputText id="nome" 
+                                 value="#{eventoBean.evento.nome}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="nome"/>
+
+                    <h:outputText value="Sigla: "/>
+                    <p:inputText id="sigla" 
+                                 value="#{eventoBean.evento.sigla}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="sigla"/>
+
+                    <h:outputText value="Per&iacute;odo: "/>
+                    <p:inputText id="periodo" 
+                                 value="#{eventoBean.evento.periodo}" 
+                                 size="45">
+                    </p:inputText>
+                    <h:message for="periodo"/>
+                    
+                    <h:outputText value="Local: "/>
+                    <p:inputText id="local" 
+                                 value="#{eventoBean.evento.local}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="local"/>
+
+                    <h:outputText value="Resumo: "/>
+                    <p:inputTextarea  id="resumo" 
+                                      value="#{eventoBean.evento.resumo}" 
+                                      cols="48"/>
+                    <h:message for="resumo"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../template/padrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        
+        <h:form id="form">
+            <p:growl showDetail="true" showSummary="true"/>
+
+            <p:panel>
+                <f:facet name="header">
+                    <h:outputText value="Lista de Cursos"
+                                  style="font-size: 20px; font-weight: bold;"/>
+                </f:facet>
+
+                <p:dataTable 
+                    id="lista"
+                    var="curso" value="#{cursoBean.cursos}"
+                    emptyMessage="Sem registro para a exibi&ccedil;&atilde;o."
+                    paginator="true" rows="10"  
+                    paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                    rowsPerPageTemplate="10,15,20,25">
+
+                    <f:facet name="header">
+                        <p:commandButton id="novo"
+                                     value="Novo registro"
+                                     ajax="false"
+                                     action="#{cursoBean.novo()}"
+                                     icon="ui-icon-plusthick"/>
+                    </f:facet>
+                    
+                    <p:column headerText="Nome" filterBy="#{curso.codigo}">  
+                        <h:outputText value="#{curso.codigo}" />  
+                    </p:column>  
+                    
+                    <p:column headerText="Ministrante" filterBy="#{curso.palestrante.cracha}">  
+                        <h:outputText value="#{curso.palestrante.cracha}" />  
+                    </p:column>
+                    
+                    <p:column headerText="Tipo" filterBy="#{curso.tipo}">  
+                        <h:outputText value="#{curso.tipo}" />  
+                    </p:column>
+                    
+                    <p:column headerText="Evento" filterBy="#{curso.evento.sigla}">  
+                        <h:outputText value="#{curso.evento.sigla}" />  
+                    </p:column>
+
+                    <p:column headerText="A&ccedil;&otilde;es">
+                        <p:commandLink 
+                            action="#{cursoBean.corrigir()}"
+                            title="Corrigir"
+                            ajax="false">  
+                            <h:graphicImage library="img" name="edit24.png"/>
+                            <f:setPropertyActionListener 
+                                value="#{curso}" 
+                                target="#{cursoBean.curso}" />  
+                        </p:commandLink>  
+                        
+                        <p:commandLink 
+                            ajax="false"
+                            action="#{cursoBean.gerarCracha()}"
+                            target="_blank"
+                            title="Crach&aacute; Ministrante">  
+                            <h:graphicImage library="img" name="printer24.png"/>
+                            <f:setPropertyActionListener 
+                                value="#{curso}" 
+                                target="#{cursoBean.curso}" /> 
+                        </p:commandLink>
+                    </p:column> 
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

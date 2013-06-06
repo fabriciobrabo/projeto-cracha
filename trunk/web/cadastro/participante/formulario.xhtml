@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../../template/padrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="cadastro">
+            <h:inputHidden value="#{inscritoBean.inscrito.id}"/>
+
+            <p:panel>
+                <p:messages id="alertas"/>
+
+                <f:facet name="header">
+                    <h:outputText value="Inscri&ccedil;&atilde;o de Participante"/>
+                </f:facet>
+
+                <f:facet name="footer">
+                    <p:commandButton id="btnSalvar" 
+                                     ajax="false" 
+                                     value="Salvar" 
+                                     action="#{inscritoBean.salvar()}"
+                                     icon="ui-icon-disk"/>
+                </f:facet>
+
+                <h:panelGrid columns="3" cellspacing="5">
+
+                    <h:outputText value="Nome: "/>
+                    <p:inputText id="inscritoNome" 
+                                 value="#{inscritoBean.inscrito.nome}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="inscritoNome"/>
+
+                    <h:outputText value="Crach&aacute;: "/>
+                    <p:inputText id="nomeCracha" 
+                                 value="#{inscritoBean.inscrito.cracha}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="nomeCracha"/>
+
+                    <h:outputText value="Telefone: "/>
+                    <p:inputText id="telefone" 
+                                 value="#{inscritoBean.inscrito.telefone}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="telefone"/>
+
+                    <h:outputText value="E-mail: "/>
+                    <p:inputText id="email" 
+                                 value="#{inscritoBean.inscrito.email}" 
+                                 size="45">
+                        <f:validateRegex
+                            pattern="^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$"/>
+                    </p:inputText>
+                    <h:message for="email"/>
+
+                    <h:outputText value="Institui&ccedil;&atilde;o: "/>
+                    <p:inputText id="instituicao" 
+                                 value="#{inscritoBean.inscrito.instituicao}" 
+                                 size="45"/>
+                    <h:message for="instituicao"/>
+
+                    <h:outputText value="Curso: "/>
+                    <p:selectOneMenu id="curso" 
+                                     value="#{inscritoBean.inscrito.curso}" 
+                                     style="width: 405px;"
+                                     converter="cursoConverter"
+                                     required="true"
+                                     requiredMessage="Campo obrigat&oacute;rio">
+                        
+                        <f:selectItems value="#{inscritoBean.cursos}"
+                                       var="curso"
+                                       itemLabel="#{curso.codigo}"
+                                       itemValue="#{curso}"/>
+                    </p:selectOneMenu>
+                    <h:message for="curso"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

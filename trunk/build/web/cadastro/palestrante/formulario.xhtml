@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../../template/padrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="cadastro">
+            <h:inputHidden value="#{palestranteBean.palestrante.id}"/>
+
+            <p:panel>
+                <p:messages id="alertas"/>
+
+                <f:facet name="header">
+                    <h:outputText value="Inscri&ccedil;&atilde;o de Coordenadores"/>
+                </f:facet>
+
+                <f:facet name="footer">
+                    <p:commandButton id="btnSalvar" 
+                                     ajax="false" 
+                                     value="Salvar" 
+                                     action="#{palestranteBean.salvar()}"
+                                     icon="ui-icon-disk"/>
+                </f:facet>
+
+                <h:panelGrid columns="3" cellspacing="5">
+
+                    <h:outputText value="T&iacute;tulo: "/>
+                    <p:inputText id="titulo" 
+                                 value="#{palestranteBean.palestrante.titulo}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="titulo"/>
+                    
+                    <h:outputText value="Nome: "/>
+                    <p:inputText id="nome" 
+                                 value="#{palestranteBean.palestrante.nome}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="nome"/>
+
+                    <h:outputText value="Crach&aacute;: "/>
+                    <p:inputText id="cracha" 
+                                 value="#{palestranteBean.palestrante.cracha}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="cracha"/>
+
+                    <h:outputText value="Telefone: "/>
+                    <p:inputText id="telefone" 
+                                 value="#{palestranteBean.palestrante.telefone}" 
+                                 size="45"
+                                 required="true"
+                                 requiredMessage="Campo obrigat&oacute;rio"/>
+                    <h:message for="telefone"/>
+
+                    <h:outputText value="E-mail: "/>
+                    <p:inputText id="email" 
+                                 value="#{palestranteBean.palestrante.email}" 
+                                 size="45">
+                        <f:validateRegex
+                            pattern="^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$"/>
+                    </p:inputText>
+                    <h:message for="email"/>
+
+                    <h:outputText value="Institui&ccedil;&atilde;o: "/>
+                    <p:inputText id="instituicao" 
+                                 value="#{palestranteBean.palestrante.instituicao}" 
+                                 size="45"/>
+                    <h:message for="instituicao"/>
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

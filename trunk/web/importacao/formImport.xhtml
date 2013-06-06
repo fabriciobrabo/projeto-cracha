@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../template/templatePadrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="header">
+        <ui:include src="/include/topo.xhtml"/>
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/include/menu.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+
+            <p:panel header="Importar Inscritos">
+                <p:messages showDetail="true"/>
+                <p:fileUpload value="#{importBean.file}" mode="simple"/>
+                <p:commandButton value="Importar" id="start" actionListener="#{importBean.importar()}"/>
+            </p:panel>
+            
+            <p:dialog>
+                
+            </p:dialog>
+            
+        </h:form>
+        
+    </ui:define>
+
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+</ui:composition>

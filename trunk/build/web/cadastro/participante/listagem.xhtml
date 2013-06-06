@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../../template/padrao.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:growl showDetail="true" showSummary="true"/>
+
+            <p:panel>
+                <f:facet name="header">
+                    <h:outputText value="Lista de Inscritos"
+                                  style="font-size: 20px; font-weight: bold;"/>
+                </f:facet>
+
+                <f:facet name="footer">
+                    <h:outputText value="Total de inscritos: #{inscritoBean.totalInscritos}"
+                                  style="font-size: 15px; font-weight: bold;"/>
+                </f:facet>
+
+                <p:dataTable 
+                    id="lista"
+                    var="inscrito" value="#{inscritoBean.inscritos}"
+                    emptyMessage="Sem registro para a exibi&ccedil;&atilde;o."
+                    paginator="true" rows="10"  
+                    paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                    rowsPerPageTemplate="10,15,20,25">
+
+                    <p:column headerText="Nome" filterBy="#{inscrito.nome}">  
+                        <h:outputText value="#{inscrito.nome}" />  
+                    </p:column> 
+
+                    <p:column headerText="Curso" 
+                              filterBy="#{inscrito.curso.codigo}">
+                        <h:outputText value="#{inscrito.curso.codigo}"/>
+                    </p:column>  
+
+                    <p:column id="situacao"
+                              filterBy="#{inscrito.credenciado}"   
+                              headerText="Situa&ccedil;&atilde;o"
+                              filterOptions="#{inscritoBean.situacaoOptions}"  
+                              filterMatchMode="exact">  
+                        <h:outputText rendered="#{inscrito.credenciado==0}"
+                                      value="Descredenciado"
+                                      style="color: red; font-weight: bold;"/>
+                        <h:outputText rendered="#{inscrito.credenciado==1}"
+                                      value="Credenciado"
+                                      style="color: blue; font-weight: bold;"/>
+                    </p:column>
+
+                    <p:column headerText="A&ccedil;&otilde;es">
+                        <p:commandLink
+                            action="#{inscritoBean.atualizaSituacao()}"
+                            title="Credenciar"
+                            rendered="#{inscrito.credenciado == 0}"
+                            ajax="false">  
+                            <h:graphicImage library="img" name="accept24.png"/>
+                            <f:setPropertyActionListener 
+                                value="#{inscrito}" 
+                                target="#{inscritoBean.inscrito}" />  
+                        </p:commandLink>
+
+                        <p:commandLink 
+                            action="#{inscritoBean.atualizaSituacao()}"
+                            title="Descredenciar"
+                            rendered="#{inscrito.credenciado == 1}"
+                            ajax="false">  
+                            <h:graphicImage library="img" name="delete24.png"/>
+                            <f:setPropertyActionListener 
+                                value="#{inscrito}" 
+                                target="#{inscritoBean.inscrito}" />  
+                        </p:commandLink>
+
+                        <p:commandLink 
+                            action="#{inscritoBean.corrigir()}"
+                            title="Corrigir"
+                            ajax="false">  
+                            <h:graphicImage library="img" name="edit24.png"/>
+                            <f:setPropertyActionListener 
+                                value="#{inscrito}" 
+                                target="#{inscritoBean.inscrito}" />  
+                        </p:commandLink>  
+                        
+                        <p:commandLink 
+                            ajax="false"
+                            rendered="#{inscrito.credenciado == 1}"
+                            action="#{inscritoBean.gerarCracha()}"
+                            target="_blank"
+                            title="Crach&aacute;">  
+                            <h:graphicImage library="img" name="printer24.png"/>
+                            <f:setPropertyActionListener 
+                                value="#{inscrito}" 
+                                target="#{inscritoBean.inscrito}" />
+                        </p:commandLink>
+                    </p:column> 
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
